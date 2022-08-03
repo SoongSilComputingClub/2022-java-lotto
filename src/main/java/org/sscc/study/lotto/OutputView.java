@@ -7,7 +7,7 @@ public class OutputView {
     public void printLottoNumbers(Record record) {
         System.out.println(record.getNumber() + "개를 구매했습니다.");
         for (int i = 0; i < record.getNumber(); i++) {
-            System.out.println("[" + record.NumbersToString(i) + "]");
+            System.out.println("[" + record.numbersToString(i) + "]");
         }
     }
 

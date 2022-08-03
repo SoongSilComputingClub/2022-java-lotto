@@ -17,7 +17,7 @@ public class Record {
         return tickets.size();
     }
 
-    public String NumbersToString(int i) {
+    public String numbersToString(int i) {
         return tickets.get(i).stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));

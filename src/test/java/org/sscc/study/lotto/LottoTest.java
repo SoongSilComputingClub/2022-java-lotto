@@ -3,9 +3,6 @@ package org.sscc.study.lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
@@ -27,8 +24,10 @@ class LottoTest {
         lottery.pay(3000);
         lottery.drawNumbers(new StaticLottoNumber());
         Record record = lottery.getTickets();
-        List<Integer> duplicates = record.duplicateNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(duplicates).isEqualTo(Arrays.asList(6, 6, 6));
+
+        Winning winning = new Winning("1, 2, 3, 4, 5, 6");
+        WinningStat winningStat = winning.getStat(record);
+        assertThat(winningStat.get(6)).isEqualTo(3);
     }
 
     @Test
@@ -42,5 +41,15 @@ class LottoTest {
         Winning winning = new Winning("1, 2, 3, 7, 8, 9");
         WinningStat winningStat = winning.getStat(record);
         assertThat(winningStat.portfolio(5000)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("로또 번호가 문자열 형식에 맞게 출력되는 지 확인")
+    public void testNumberString() {
+        Lottery lottery = new Lottery();
+        lottery.pay(1000);
+        lottery.drawNumbers(new StaticLottoNumber());
+        Record record = lottery.getTickets();
+        assertThat(record.numbersToString(0)).isEqualTo("1, 2, 3, 4, 5, 6");
     }
 }
