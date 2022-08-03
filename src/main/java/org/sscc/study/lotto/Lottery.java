@@ -1,11 +1,12 @@
 package org.sscc.study.lotto;
 
 public class Lottery {
+    private static final int PRICE = 1000;
     private int number;
     private LotteryTickets lotteryTickets;
 
-    public void pay(int price) {
-        this.number = price / 1000;
+    public void pay(int money) {
+        this.number = money / PRICE;
         lotteryTickets = new LotteryTickets();
     }
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class RandomLottoNumber implements NumberStrategy {
     private final List<Integer> lotteryNumbers;
+    private static final int NUMBER = 6;
 
     public RandomLottoNumber() {
         lotteryNumbers = new ArrayList<>();
@@ -17,7 +18,7 @@ public class RandomLottoNumber implements NumberStrategy {
     @Override
     public List<Integer> getNumber() {
         shuffle();
-        return lotteryNumbers.subList(0, 7);
+        return lotteryNumbers.subList(0, NUMBER);
     }
 
     private void shuffle() {

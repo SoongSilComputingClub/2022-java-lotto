@@ -7,7 +7,7 @@ public class Controller {
         InputValues inputValues = inputView.getInputValues();
 
         Lottery lottery = new Lottery();
-        lottery.pay(inputValues.getPrice());
+        lottery.pay(inputValues.getMoney());
         lottery.drawNumbers(new RandomLottoNumber());
         Record record = lottery.getTickets();
 
@@ -18,6 +18,6 @@ public class Controller {
         Winning winning = new Winning(inputValues.getWinningNumbers());
         WinningStat winningStat = winning.getStat(record);
         outputView.printStat(winningStat);
-        outputView.printPortfolio(winningStat, inputValues.getPrice());
+        outputView.printPortfolio(winningStat.portfolio(inputValues.getMoney()));
     }
 }

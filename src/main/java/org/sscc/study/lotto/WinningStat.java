@@ -4,27 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinningStat {
-    private final Map<Integer, Integer> portfolio = new HashMap<>();
+    private static final int NUMBER = 6;
+    private final Map<Integer, Integer> stat = new HashMap<>();
 
     public WinningStat() {
-        for (int i = 0; i <= 6; i++) {
-            portfolio.put(i, 0);
+        for (int i = 0; i <= NUMBER; i++) {
+            stat.put(i, 0);
         }
     }
 
     public void add(int number) {
-        portfolio.replace(number, portfolio.get(number) + 1);
+        stat.replace(number, stat.get(number) + 1);
     }
 
     public int get(int number) {
-        return portfolio.get(number);
+        return stat.get(number);
     }
 
-    public int totalPrize() {
-        int total = 0;
-        for (int i : portfolio.keySet()) {
-            total += Prize.getPrize(i) * portfolio.get(i);
-        }
-        return total;
+    private int totalPrize() {
+        return stat.keySet().stream()
+                .reduce((total, n) -> total + Prize.getPrize(n) * stat.get(n))
+                .orElse(0);
+    }
+
+    public double portfolio(int price){
+        return (double)totalPrize()/price;
     }
 }
