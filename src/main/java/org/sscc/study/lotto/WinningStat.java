@@ -27,7 +27,7 @@ public class WinningStat {
                 .orElse(0);
     }
 
-    public double portfolio(int price){
-        return (double)totalPrize()/price;
+    public double portfolio(int price) {
+        return (double) totalPrize() / price;
     }
 }

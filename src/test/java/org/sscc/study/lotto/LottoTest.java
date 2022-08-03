@@ -6,14 +6,13 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
 
     @Test
     @DisplayName("가격에 맞는 갯수를 구매했는 지 확인")
-    public void testNumber(){
+    public void testNumber() {
         Lottery lottery = new Lottery();
         lottery.pay(14000);
         lottery.drawNumbers(new RandomLottoNumber());
@@ -23,7 +22,7 @@ class LottoTest {
 
     @Test
     @DisplayName("당첨번호 입력 시 번호가 일치하는 지 확인")
-    public void testWinningNumber(){
+    public void testWinningNumber() {
         Lottery lottery = new Lottery();
         lottery.pay(3000);
         lottery.drawNumbers(new StaticLottoNumber());
@@ -34,7 +33,7 @@ class LottoTest {
 
     @Test
     @DisplayName("수익률이 올바른 지 확인")
-    public void testPortfolio(){
+    public void testPortfolio() {
         Lottery lottery = new Lottery();
         lottery.pay(5000);
         lottery.drawNumbers(new StaticLottoNumber());
