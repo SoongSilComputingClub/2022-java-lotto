@@ -2,6 +2,7 @@ package org.sscc.study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.sscc.study.lotto.domain.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

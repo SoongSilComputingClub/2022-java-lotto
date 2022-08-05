@@ -1,4 +1,8 @@
-package org.sscc.study.lotto;
+package org.sscc.study.lotto.controller;
+
+import org.sscc.study.lotto.domain.*;
+import org.sscc.study.lotto.view.InputView;
+import org.sscc.study.lotto.view.ResultView;
 
 public class Controller {
     public static void main(String[] args) {
@@ -10,13 +14,13 @@ public class Controller {
         lottery.drawNumbers(new RandomLottoNumber());
         Record record = lottery.getTickets();
 
-        OutputView outputView = new OutputView();
-        outputView.printLottoNumbers(record);
+        ResultView resultView = new ResultView();
+        resultView.printLottoNumbers(record);
 
         InputWinningNumbers winningNumbers = inputView.inputWinningNumbers();
         Winning winning = new Winning(winningNumbers.getWinningNumbers());
         WinningStat winningStat = winning.getStat(record);
-        outputView.printStat(winningStat);
-        outputView.printPortfolio(winningStat.portfolio(money.getMoney()));
+        resultView.printStat(winningStat);
+        resultView.printPortfolio(winningStat.portfolio(money.getMoney()));
     }
 }

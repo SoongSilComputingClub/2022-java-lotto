@@ -1,4 +1,7 @@
-package org.sscc.study.lotto;
+package org.sscc.study.lotto.view;
+
+import org.sscc.study.lotto.domain.InputMoney;
+import org.sscc.study.lotto.domain.InputWinningNumbers;
 
 import java.util.Scanner;
 

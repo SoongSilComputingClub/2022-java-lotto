@@ -1,4 +1,4 @@
-package org.sscc.study.lotto;
+package org.sscc.study.lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;

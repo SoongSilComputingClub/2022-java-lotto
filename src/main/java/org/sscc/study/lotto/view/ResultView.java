@@ -1,6 +1,10 @@
-package org.sscc.study.lotto;
+package org.sscc.study.lotto.view;
 
-public class OutputView {
+import org.sscc.study.lotto.domain.Prize;
+import org.sscc.study.lotto.domain.Record;
+import org.sscc.study.lotto.domain.WinningStat;
+
+public class ResultView {
     private static final int MINIMUM = 3;
     private static final int MAXIMUM = 6;
 

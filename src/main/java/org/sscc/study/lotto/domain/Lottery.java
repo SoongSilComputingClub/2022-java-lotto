@@ -1,4 +1,4 @@
-package org.sscc.study.lotto;
+package org.sscc.study.lotto.domain;
 
 public class Lottery {
     private static final int PRICE = 1000;
