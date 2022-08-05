@@ -3,7 +3,7 @@ package org.sscc.study.lotto;
 import java.util.Arrays;
 
 public enum Prize {
-    NONE(0, 0),
+    NONE(2, 0),
     FOURTH(3, 5000),
     THIRD(4, 50_000),
     SECOND(5, 1_500_000),
