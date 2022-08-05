@@ -1,8 +1,8 @@
-package Controller;
+package controller;
 
-import Domain.*;
-import View.InputView;
-import View.ResultView;
+import domain.*;
+import view.InputView;
+import view.ResultView;
 
 public class Controller {
     private final InputView inputView;

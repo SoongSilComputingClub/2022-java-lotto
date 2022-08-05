@@ -1,12 +1,11 @@
-package View;
+package view;
 
-import Domain.LottoResult;
-import Domain.Rank;
+import domain.Rank;
 
 import java.text.DecimalFormat;
 import java.util.Map;
 
-import static Domain.Rank.*;
+import static domain.Rank.*;
 
 public class ResultView {
     public void printTotalCount(int count) {
