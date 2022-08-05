@@ -22,6 +22,6 @@ public enum Prize {
                 .filter(value -> number > Prize.NONE.number && value.number == number)
                 .findAny()
                 .orElse(Prize.NONE);
-        return result == Prize.NONE ? 0 : result.prize;
+        return result.prize;
     }
 }

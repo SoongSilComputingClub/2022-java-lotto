@@ -4,7 +4,6 @@ import java.util.List;
 
 public class RandomLottoNumber implements NumberStrategy {
     private final LottoNumber lottoNumber;
-    private static final int NUMBER = 6;
 
     public RandomLottoNumber() {
         lottoNumber = new LottoNumber();
@@ -12,6 +11,6 @@ public class RandomLottoNumber implements NumberStrategy {
 
     @Override
     public List<Integer> getNumber() {
-        return lottoNumber.getLottoNumbers(NUMBER);
+        return lottoNumber.getLottoNumbers();
     }
 }
