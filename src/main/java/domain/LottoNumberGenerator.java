@@ -1,21 +1,24 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoNumberGenerator {
-    public List<Integer> newLottoNumber() {
-        List<Integer> numList = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numList.add(i);
-        }
+    private static final List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 45)
+            .mapToObj(LottoNumber::new)
+            .collect(toList());
 
-        List<Integer> lottoNumber;
-        Collections.shuffle(numList);
-        lottoNumber = numList.subList(0, 6);
-        Collections.sort(lottoNumber);
+    public Set<LottoNumber> newLottoNumber() {
+        List<LottoNumber> newNumbers;
+        Collections.shuffle(lottoNumbers);
+        newNumbers = lottoNumbers.subList(0, 6);
+        Collections.sort(newNumbers);
 
-        return new ArrayList<>(lottoNumber);
+        return new HashSet<>(newNumbers);
     }
 }

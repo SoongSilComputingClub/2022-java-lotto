@@ -1,50 +1,53 @@
 package domain;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.ArrayList;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoTicket {
     private static final int LOTTERY_NUMBER_SIZE = 6;
 
-    private final List<Integer> lotteryNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        List<Integer> lotteryNumbers = lottoNumberGenerator.newLottoNumber();
-        checkValidation(lotteryNumbers);
-        this.lotteryNumbers = lotteryNumbers;
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lotteryNumbers);
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
+        checkValidation(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public int matching(WinningNumbers winningNumbers) {
-        List<Integer> myNumber = new ArrayList<>(lotteryNumbers);
+        Set<LottoNumber> myNumber = new HashSet<>(lottoNumbers);
         myNumber.retainAll(winningNumbers.getWinningNumbers());
         return myNumber.size();
     }
 
     public String toString() {
-        return lotteryNumbers.toString();
+        List<String> str = lottoNumbers.stream()
+                .sorted()
+                .map(LottoNumber::toString)
+                .collect(toList());
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        sb.append(String.join(", ", str));
+        sb.append("]");
+        return sb.toString();
     }
 
-    private void checkValidation(List<Integer> lotteryNumbers) {
-        checkSize(lotteryNumbers);
-        checkUniqueness(lotteryNumbers);
+    private void checkValidation(Set<LottoNumber> lottoNumbers) {
+        checkSize(lottoNumbers);
+        checkUniqueness(lottoNumbers);
     }
 
-    private void checkSize(List<Integer> lotteryNumbers) {
-        if (lotteryNumbers.size() != LOTTERY_NUMBER_SIZE) {
+    private void checkSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTERY_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void checkUniqueness(List<Integer> lotteryNumbers) {
-        Set<Integer> uniqueSetOfNumbers = new HashSet<>(lotteryNumbers);
-        if (uniqueSetOfNumbers.size() != LOTTERY_NUMBER_SIZE) {
+    private void checkUniqueness(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTERY_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
     }

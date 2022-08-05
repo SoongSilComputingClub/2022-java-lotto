@@ -1,26 +1,26 @@
 package domain;
 
-import java.util.Map;
+import java.util.List;
 
 public class LottoResult {
-    private final Map<Rank, Integer> winnerMap;
+    private final List<Rank> ranks;
 
-    public LottoResult(Map<Rank, Integer> winnerMap) {
-        this.winnerMap = winnerMap;
+    private final int investMoney;
+
+    public LottoResult(List<Rank> ranks, int investMoney) {
+        this.ranks = ranks;
+        this.investMoney = investMoney;
     }
 
-    public double earningRate(LottoPurchaseMoney lottoPurchaseMoney) {
+    public double earningRate() {
         int earning = 0;
-        for (Map.Entry<Rank, Integer> entry : winnerMap.entrySet()) {
-            earning += entry.getKey().prize() * entry.getValue();
+        for (Rank rank : ranks) {
+            earning += rank.prize();
         }
-
-        int price = 1000 * lottoPurchaseMoney.maxCount();
-
-        return (double) earning / price;
+        return (double) earning / investMoney;
     }
 
-    public Map<Rank, Integer> winnerMap() {
-        return winnerMap;
+    public List<Rank> getRanks() {
+        return ranks;
     }
 }

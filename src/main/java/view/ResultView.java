@@ -3,9 +3,8 @@ package view;
 import domain.Rank;
 
 import java.text.DecimalFormat;
-import java.util.Map;
-
-import static domain.Rank.*;
+import java.util.Collections;
+import java.util.List;
 
 public class ResultView {
     public void printTotalCount(int count) {
@@ -16,13 +15,13 @@ public class ResultView {
         System.out.println(lottoTickets);
     }
 
-    public void printWinnerStat(Map<Rank, Integer> lottoResult) {
+    public void printWinnerStat(List<Rank> ranks) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (" + FOURTH.prize() + "원)-" + lottoResult.getOrDefault(FOURTH, 0) + "개");
-        System.out.println("4개 일치 (" + THIRD.prize() + "원)-" + lottoResult.getOrDefault(THIRD, 0) + "개");
-        System.out.println("5개 일치 (" + SECOND.prize() + "원)-" + lottoResult.getOrDefault(SECOND, 0) + "개");
-        System.out.println("6개 일치 (" + FIRST.prize() + "원)-" + lottoResult.getOrDefault(FIRST, 0) + "개");
+        System.out.println("3개 일치 (" + Rank.FOURTH.prize() + "원)-" + Collections.frequency(ranks, Rank.FOURTH) + "개");
+        System.out.println("4개 일치 (" + Rank.THIRD.prize() + "원)-" + Collections.frequency(ranks, Rank.THIRD) + "개");
+        System.out.println("5개 일치 (" + Rank.SECOND.prize() + "원)-" + Collections.frequency(ranks, Rank.SECOND) + "개");
+        System.out.println("6개 일치 (" + Rank.FIRST.prize() + "원)-" + Collections.frequency(ranks, Rank.FIRST) + "개");
     }
 
     public void printEarningRatio(double rate) {

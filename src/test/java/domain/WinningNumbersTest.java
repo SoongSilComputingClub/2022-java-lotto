@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
+import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningNumbersTest {
@@ -27,8 +26,8 @@ class WinningNumbersTest {
         //given
         WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
         //when
-        List<Integer> unmodifiableNumbers = winningNumbers.getWinningNumbers();
+        Set<LottoNumber> unmodifiableNumbers = winningNumbers.getWinningNumbers();
         //then
-        assertThatThrownBy(() -> unmodifiableNumbers.add(3)).isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> unmodifiableNumbers.add(new LottoNumber(3))).isInstanceOf(UnsupportedOperationException.class);
     }
 }

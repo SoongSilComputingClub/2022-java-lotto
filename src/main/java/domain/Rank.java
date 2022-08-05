@@ -3,10 +3,10 @@ package domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 20_0000_0000),
-    SECOND(5, 150_0000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     NONE(0, 0);
 
     private final int count;

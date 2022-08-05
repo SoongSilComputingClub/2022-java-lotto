@@ -1,6 +1,9 @@
 package controller;
 
-import domain.*;
+import domain.LottoMachine;
+import domain.LottoPurchaseMoney;
+import domain.LottoResult;
+import domain.WinningNumbers;
 import view.InputView;
 import view.ResultView;
 
@@ -15,17 +18,16 @@ public class Controller {
 
     public void execute() {
         LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(inputView.getMoney());
+        LottoMachine lottoMachine = new LottoMachine(lottoPurchaseMoney);
+        lottoMachine.purchase();
 
-        LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.purchase(lottoPurchaseMoney);
         resultView.printTotalCount(lottoMachine.ticketsCount());
         resultView.printLottoTickets(lottoMachine.ticketsToString());
 
         WinningNumbers winningNumbers = new WinningNumbers(inputView.getWinner());
-
         LottoResult lottoResult = lottoMachine.confirm(winningNumbers);
 
-        resultView.printWinnerStat(lottoResult.winnerMap());
-        resultView.printEarningRatio(lottoResult.earningRate(lottoPurchaseMoney));
+        resultView.printWinnerStat(lottoResult.getRanks());
+        resultView.printEarningRatio(lottoResult.earningRate());
     }
 }
