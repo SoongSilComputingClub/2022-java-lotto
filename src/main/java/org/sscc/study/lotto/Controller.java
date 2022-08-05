@@ -3,21 +3,20 @@ package org.sscc.study.lotto;
 public class Controller {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        inputView.inputPrice();
-        InputValues inputValues = inputView.getInputValues();
+        InputMoney money = inputView.inputPrice();
 
         Lottery lottery = new Lottery();
-        lottery.pay(inputValues.getMoney());
+        lottery.pay(money.getMoney());
         lottery.drawNumbers(new RandomLottoNumber());
         Record record = lottery.getTickets();
 
         OutputView outputView = new OutputView();
         outputView.printLottoNumbers(record);
 
-        inputView.inputWinningNumbers();
-        Winning winning = new Winning(inputValues.getWinningNumbers());
+        InputWinningNumbers winningNumbers = inputView.inputWinningNumbers();
+        Winning winning = new Winning(winningNumbers.getWinningNumbers());
         WinningStat winningStat = winning.getStat(record);
         outputView.printStat(winningStat);
-        outputView.printPortfolio(winningStat.portfolio(inputValues.getMoney()));
+        outputView.printPortfolio(winningStat.portfolio(money.getMoney()));
     }
 }
