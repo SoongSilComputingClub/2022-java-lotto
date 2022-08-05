@@ -3,6 +3,7 @@ package org.sscc.study.lotto;
 import java.util.Arrays;
 
 public enum Prize {
+    NONE(0, 0),
     FOURTH(3, 5000),
     THIRD(4, 50_000),
     SECOND(5, 1_500_000),
@@ -18,9 +19,9 @@ public enum Prize {
 
     public static int getPrize(int number) {
         Prize result = Arrays.stream(Prize.values())
-                .filter(value -> value.number == number)
+                .filter(value -> number > Prize.NONE.number && value.number == number)
                 .findAny()
-                .orElse(null);
-        return result == null ? 0 : result.prize;
+                .orElse(Prize.NONE);
+        return result == Prize.NONE ? 0 : result.prize;
     }
 }
