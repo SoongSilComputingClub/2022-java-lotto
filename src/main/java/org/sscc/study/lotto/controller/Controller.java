@@ -1,24 +1,27 @@
 package org.sscc.study.lotto.controller;
 
-import org.sscc.study.lotto.domain.*;
+import org.sscc.study.lotto.domain.InputMoney;
+import org.sscc.study.lotto.domain.LotteryMachine;
+import org.sscc.study.lotto.domain.WinningNumbers;
+import org.sscc.study.lotto.domain.WinningStat;
 import org.sscc.study.lotto.view.InputView;
 import org.sscc.study.lotto.view.ResultView;
 
 public class Controller {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        InputMoney money = inputView.inputPrice();
-
-        Lottery lottery = new Lottery();
-        lottery.pay(money.getMoney());
-        lottery.drawNumbers(new RandomLottoNumber());
-
         ResultView resultView = new ResultView();
-        resultView.printNumber(lottery.getNumber());
-        resultView.printLottoNumbers(lottery.getString());
+        LotteryMachine lotteryMachine = new LotteryMachine();
 
-        InputWinningNumbers winningNumbers = inputView.inputWinningNumbers();
-        WinningStat winningStat = lottery.getStat(winningNumbers.getWinningNumbers());
+        InputMoney money = inputView.inputPrice();
+        lotteryMachine.pay(money.getMoney());
+        lotteryMachine.drawNumbers();
+
+        resultView.printNumber(lotteryMachine.getNumber());
+        resultView.printLottoNumbers(lotteryMachine.getString());
+
+        WinningNumbers winningNumbers = inputView.inputWinningNumbers();
+        WinningStat winningStat = lotteryMachine.getStat(winningNumbers.getWinningNumbers());
         resultView.printStat(winningStat);
         resultView.printPortfolio(winningStat.portfolio(money.getMoney()));
     }

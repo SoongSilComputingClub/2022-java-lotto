@@ -1,12 +1,13 @@
 package org.sscc.study.lotto.domain;
 
-import java.util.List;
+import java.util.Set;
 
-public class Lottery {
+public class LotteryMachine {
     private static final int PRICE = 1000;
     private int number;
     private LotteryTickets lotteryTickets;
     private WinningStat winningStat;
+    private final NumberStrategy numberStrategy = new RandomLottoNumberGenerator();
 
     public void pay(int money) {
         this.number = money / PRICE;
@@ -14,9 +15,9 @@ public class Lottery {
         winningStat = new WinningStat();
     }
 
-    public void drawNumbers(NumberStrategy numberStrategy) {
+    public void drawNumbers() {
         for (int i = 0; i < number; i++) {
-            lotteryTickets.addLotteryTicket(numberStrategy.getNumber());
+            lotteryTickets.addLotteryTicket(numberStrategy);
         }
     }
 
@@ -28,7 +29,7 @@ public class Lottery {
         return number;
     }
 
-    public WinningStat getStat(List<Integer> winningNumbers) {
+    public WinningStat getStat(Set<LottoNumber> winningNumbers) {
         lotteryTickets.duplicateNumbers(winningNumbers).forEach(x -> winningStat.add(x));
         return winningStat;
     }

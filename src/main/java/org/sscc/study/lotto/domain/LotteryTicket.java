@@ -1,23 +1,24 @@
 package org.sscc.study.lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LotteryTicket {
-    private final List<Integer> lotteryNumbers = new ArrayList<>();
+    private final Set<LottoNumber> lotteryNumbers = new HashSet<>();
 
-    public LotteryTicket(List<Integer> numbers) {
+    public LotteryTicket(Set<LottoNumber> numbers) {
         lotteryNumbers.addAll(numbers);
     }
 
     public String getString() {
         return "[" + lotteryNumbers.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(",")) + "]";
+                .sorted()
+                .map(x -> String.valueOf(x.getNumber()))
+                .collect(Collectors.joining(", ")) + "]";
     }
 
-    public int checkNumbers(List<Integer> winningNumber) {
+    public int checkDuplicates(Set<LottoNumber> winningNumber) {
         return (int) winningNumber.stream()
                 .filter(lotteryNumbers::contains)
                 .count();

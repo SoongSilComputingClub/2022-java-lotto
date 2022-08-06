@@ -1,7 +1,7 @@
 package org.sscc.study.lotto.domain;
 
-import java.util.List;
+import java.util.Set;
 
 public interface NumberStrategy {
-    List<Integer> getNumber();
+    Set<LottoNumber> getNumber();
 }
