@@ -2,6 +2,7 @@ package org.sscc.study.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LotteryTicket {
     private final List<Integer> lotteryNumbers = new ArrayList<>();
@@ -10,7 +11,15 @@ public class LotteryTicket {
         lotteryNumbers.addAll(numbers);
     }
 
-    public List<Integer> getLotteryTicket() {
-        return lotteryNumbers;
+    public String getString() {
+        return "[" + lotteryNumbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(",")) + "]";
+    }
+
+    public int checkNumbers(List<Integer> winningNumber) {
+        return (int) winningNumber.stream()
+                .filter(lotteryNumbers::contains)
+                .count();
     }
 }

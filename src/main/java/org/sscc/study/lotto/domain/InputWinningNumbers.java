@@ -1,13 +1,25 @@
 package org.sscc.study.lotto.domain;
 
-public class InputWinningNumbers {
-    private final String winningNumbers;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
-    public InputWinningNumbers(String winningNumbers) {
-        this.winningNumbers = winningNumbers;
+public class InputWinningNumbers {
+    private final List<Integer> winningNumbers;
+
+    public InputWinningNumbers(String input) {
+        winningNumbers = new ArrayList<>();
+        getWinningNumbers(input);
     }
 
-    public String getWinningNumbers(){
+    private void getWinningNumbers(String input) {
+        StringTokenizer st = new StringTokenizer(input, ", ");
+        while (st.hasMoreTokens()) {
+            winningNumbers.add(Integer.parseInt(st.nextToken()));
+        }
+    }
+
+    public List<Integer> getWinningNumbers() {
         return winningNumbers;
     }
 }

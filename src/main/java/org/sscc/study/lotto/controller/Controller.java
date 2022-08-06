@@ -12,14 +12,13 @@ public class Controller {
         Lottery lottery = new Lottery();
         lottery.pay(money.getMoney());
         lottery.drawNumbers(new RandomLottoNumber());
-        Record record = lottery.getTickets();
 
         ResultView resultView = new ResultView();
-        resultView.printLottoNumbers(record);
+        resultView.printNumber(lottery.getNumber());
+        resultView.printLottoNumbers(lottery.getString());
 
         InputWinningNumbers winningNumbers = inputView.inputWinningNumbers();
-        Winning winning = new Winning(winningNumbers.getWinningNumbers());
-        WinningStat winningStat = winning.getStat(record);
+        WinningStat winningStat = lottery.getStat(winningNumbers.getWinningNumbers());
         resultView.printStat(winningStat);
         resultView.printPortfolio(winningStat.portfolio(money.getMoney()));
     }
