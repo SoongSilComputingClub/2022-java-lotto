@@ -29,7 +29,7 @@ class WinningStatTest {
 
     @Test
     @DisplayName("5개 일치 시 보너스볼 일치에 대해 분리되는 지 확인")
-    public void testSecond(){
+    public void testSecond() {
         WinningStat winningStat = new WinningStat();
         winningStat.add(new MatchData(5, false));
         winningStat.add(new MatchData(5, true));

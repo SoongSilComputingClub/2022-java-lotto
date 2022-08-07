@@ -20,7 +20,7 @@ class LotteryTicketsTest {
 
     @Test
     @DisplayName("2등(5개-보너스볼)이 일치되는 지 확인")
-    public void testSecond(){
+    public void testSecond() {
         LotteryTickets lotteryTickets = new LotteryTickets();
         lotteryTickets.addLotteryTicket(new StaticLottoNumberGenerator());
         List<MatchData> matchData = lotteryTickets.
