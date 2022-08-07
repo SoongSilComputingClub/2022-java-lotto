@@ -3,14 +3,14 @@ package domain;
 public class LottoPurchaseMoney {
     private static final int LOTTO_PRICE = 1000;
 
-    private final int lottoPurchaseMoney;
+    private final int lottoAmount;
 
     private final int lottoInvestMoney;
 
     public LottoPurchaseMoney(int krw) {
         validateMoney(krw);
-        this.lottoPurchaseMoney = krw;
-        this.lottoInvestMoney = krw / LOTTO_PRICE * LOTTO_PRICE;
+        this.lottoAmount = krw / LOTTO_PRICE;
+        this.lottoInvestMoney = lottoAmount * LOTTO_PRICE;
     }
 
     private void validateMoney(int krw) {
@@ -20,7 +20,7 @@ public class LottoPurchaseMoney {
     }
 
     public int getAmount() {
-        return lottoPurchaseMoney / LOTTO_PRICE;
+        return lottoAmount;
     }
 
     public int getInvestMoney() {
