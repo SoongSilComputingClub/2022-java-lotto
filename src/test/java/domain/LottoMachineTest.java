@@ -11,7 +11,7 @@ class LottoMachineTest {
     @DisplayName("티켓 발급 테스트")
     void should_PurchaseTicket() {
         //given
-        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(14000);
+        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000");
         //when
         LottoMachine lottoMachine = new LottoMachine(lottoPurchaseMoney);
         //then

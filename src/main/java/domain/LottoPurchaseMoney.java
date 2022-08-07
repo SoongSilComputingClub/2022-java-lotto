@@ -7,7 +7,8 @@ public class LottoPurchaseMoney {
 
     private final int lottoInvestMoney;
 
-    public LottoPurchaseMoney(int krw) {
+    public LottoPurchaseMoney(String input) {
+        int krw = Integer.parseInt(input);
         validateMoney(krw);
         this.lottoAmount = krw / LOTTO_PRICE;
         this.lottoInvestMoney = lottoAmount * LOTTO_PRICE;

@@ -14,7 +14,7 @@ class RankTest {
         //when
         int count = 6;
         //then
-        assertThat(Rank.of(count)).isEqualTo(Rank.FIRST);
-        assertThat(Rank.of(count).prize()).isEqualTo(20_0000_0000);
+        assertThat(Rank.of(count, false)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.of(count, false).prize()).isEqualTo(20_0000_0000);
     }
 }

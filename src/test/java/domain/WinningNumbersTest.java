@@ -17,17 +17,17 @@ class WinningNumbersTest {
     })
     @DisplayName("문자열 입력 유효성 테스트")
     void should_ThrowException_ForInvalidString(String input) {
-        assertThatThrownBy(() -> new WinningNumbers(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningNumbers(input, "45")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("로또 티켓 불변 테스트")
     void should_ThrowException_AsImmutableList() {
         //given
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", "7");
         //when
-        Set<LottoNumber> unmodifiableNumbers = winningNumbers.getWinningNumbers();
+        Set<WinningNumber> unmodifiableNumbers = winningNumbers.getWinningNumbers();
         //then
-        assertThatThrownBy(() -> unmodifiableNumbers.add(new LottoNumber(3))).isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> unmodifiableNumbers.add(new WinningNumber(3, BallType.NORMAL))).isInstanceOf(UnsupportedOperationException.class);
     }
 }

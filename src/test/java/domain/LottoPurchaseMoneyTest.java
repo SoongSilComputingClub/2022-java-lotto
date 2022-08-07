@@ -10,19 +10,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoPurchaseMoneyTest {
     @ParameterizedTest
-    @ValueSource(ints = {
-            -500,
-            0,
-            500
+    @ValueSource(strings = {
+            "-500",
+            "0",
+            "500"
     })
     @DisplayName("로또 구입 금액 테스트")
-    void should_ReturnMaxCount(int money) {
+    void should_ReturnMaxCount(String money) {
         //given
-        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(14000);
+        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000");
         //when
 
         //then
-        assertThatNoException().isThrownBy(() -> new LottoPurchaseMoney(14000));
+        assertThatNoException().isThrownBy(() -> new LottoPurchaseMoney("14000"));
         assertThatThrownBy(() -> new LottoPurchaseMoney(money))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThat(lottoPurchaseMoney.getAmount()).isEqualTo(14);

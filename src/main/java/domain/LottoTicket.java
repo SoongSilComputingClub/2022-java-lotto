@@ -1,8 +1,8 @@
 package domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -17,9 +17,20 @@ public class LottoTicket {
     }
 
     public int matching(WinningNumbers winningNumbers) {
-        Set<LottoNumber> myNumber = new HashSet<>(lottoNumbers);
+        Set<WinningNumber> myNumber = lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map(number -> new WinningNumber(number, BallType.NORMAL))
+                .collect(Collectors.toSet());
         myNumber.retainAll(winningNumbers.getWinningNumbers());
         return myNumber.size();
+    }
+
+    public boolean matching(WinningNumber bonusNumber) {
+        Set<WinningNumber> myNumber = lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map(number -> new WinningNumber(number, BallType.BONUS))
+                .collect(Collectors.toSet());
+        return myNumber.contains(bonusNumber);
     }
 
     public String toString() {

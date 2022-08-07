@@ -24,7 +24,7 @@ public class Controller {
         resultView.printTotalCount(lottoMachine.ticketsCount());
         resultView.printLottoTickets(lottoMachine.ticketsToString());
 
-        WinningNumbers winningNumbers = new WinningNumbers(inputView.getWinner());
+        WinningNumbers winningNumbers = new WinningNumbers(inputView.getWinner(), inputView.getBonusNumber());
         LottoResult lottoResult = lottoMachine.confirm(winningNumbers);
 
         resultView.printWinnerStat(lottoResult.getRanks());
