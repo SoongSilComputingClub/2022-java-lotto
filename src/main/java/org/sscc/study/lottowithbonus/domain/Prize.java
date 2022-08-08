@@ -32,9 +32,15 @@ public enum Prize {
                 .findAny()
                 .orElse(Prize.NONE);
         if (result.number == THIRD.number) {
-            if (matchData.hasBonus()) return SECOND.prize;
-            return THIRD.prize;
+            return confirmBonus(matchData);
         }
         return result.prize;
+    }
+
+    private static int confirmBonus(MatchData matchData) {
+        if (matchData.hasBonus()) {
+            return SECOND.prize;
+        }
+        return THIRD.prize;
     }
 }
