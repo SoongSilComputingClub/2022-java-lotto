@@ -1,8 +1,8 @@
 package domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -16,10 +16,8 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matching(WinningNumbers winningNumbers) {
-        Set<LottoNumber> myNumber = new HashSet<>(lottoNumbers);
-        myNumber.retainAll(winningNumbers.getWinningNumbers());
-        return myNumber.size();
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     public String toString() {

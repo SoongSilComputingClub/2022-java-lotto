@@ -20,7 +20,7 @@ public class LottoTickets {
     public List<Rank> findWinner(WinningNumbers winningNumbers) {
         List<Rank> winnerList = new ArrayList<>();
         lottoTickets.forEach((lottoTicket) -> {
-            Rank rank = winningNumbers.match(lottoTicket);
+            Rank rank = winningNumbers.getRank(lottoTicket);
             winnerList.add(rank);
         });
 

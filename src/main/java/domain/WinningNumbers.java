@@ -11,18 +11,27 @@ public class WinningNumbers {
 
     private final Set<LottoNumber> winningNumbers;
 
-    public WinningNumbers(String input) {
-        Set<LottoNumber> lottoNumber = convertToSet(input);
-        checkValidation(lottoNumber);
-        this.winningNumbers = lottoNumber;
+    private final LottoNumber bonusNumber;
+
+    public WinningNumbers(String winningNumbers, String bonusNumber) {
+        Set<LottoNumber> lottoNumbers = convertToSet(winningNumbers);
+        checkValidation(lottoNumbers);
+        this.winningNumbers = lottoNumbers;
+
+        LottoNumber bonus = convertToBall(bonusNumber);
+        this.bonusNumber = bonus;
     }
 
     public Set<LottoNumber> getWinningNumbers() {
         return Collections.unmodifiableSet(winningNumbers);
     }
 
-    public Rank match(LottoTicket lottoTicket) {
-        return Rank.of(lottoTicket.matching(this));
+    public Rank getRank(LottoTicket lottoTicket) {
+        int count = (int) winningNumbers.stream()
+                .filter(lottoTicket::contains)
+                .count();
+        boolean hasBonus = lottoTicket.contains(bonusNumber);
+        return Rank.of(count, hasBonus);
     }
 
     private Set<LottoNumber> convertToSet(String input) {
@@ -30,6 +39,10 @@ public class WinningNumbers {
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
+    }
+
+    private LottoNumber convertToBall(String input) {
+        return new LottoNumber(Integer.parseInt(input));
     }
 
     private void checkValidation(Set<LottoNumber> lottoNumber) {
