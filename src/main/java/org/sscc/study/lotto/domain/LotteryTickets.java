@@ -2,7 +2,6 @@ package org.sscc.study.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LotteryTickets {
@@ -16,9 +15,9 @@ public class LotteryTickets {
         lotteryTickets.add(new LotteryTicket(numberStrategy.getNumber()));
     }
 
-    public List<Integer> duplicateNumbers(Set<LottoNumber> winningNumber) {
+    public List<MatchData> duplicateNumbers(WinningNumbers winningNumber) {
         return lotteryTickets.stream()
-                .map(x -> x.checkDuplicates(winningNumber))
+                .map(x -> x.getMatchData(winningNumber))
                 .collect(Collectors.toList());
     }
 

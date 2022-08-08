@@ -1,4 +1,4 @@
-package org.sscc.study.lottowithbonus.domain;
+package org.sscc.study.lotto.domain;
 
 public class MatchData {
     private final int number;

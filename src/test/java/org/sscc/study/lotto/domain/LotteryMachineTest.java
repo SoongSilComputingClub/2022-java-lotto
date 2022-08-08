@@ -21,12 +21,24 @@ class LotteryMachineTest {
     @ParameterizedTest
     @DisplayName("1~45 이외의 값 입력 시 예외 처리 확인")
     @ValueSource(strings = {
-            "1, 2, 3, 3, 4, 4",
-            "1, 2, 3"
+            "1, 2, 3, 4, 5, 49",
+            "50, 2, 3, 4, 5, 6"
     })
     public void testException(String input) {
         assertThatThrownBy(() -> {
-            WinningNumbers winningNumbers = new WinningNumbers(input);
+            WinningNumbers winningNumbers = new WinningNumbers(input, 7);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @DisplayName("6개 숫자가 입력되지 않았을 때의 예외 처리 확인")
+    @ValueSource(strings = {
+            "1, 2, 3, 3, 4, 4",
+            "1, 2, 3"
+    })
+    public void testLottoNumber(String input) {
+        assertThatThrownBy(() -> {
+            WinningNumbers winningNumbers = new WinningNumbers(input, 7);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

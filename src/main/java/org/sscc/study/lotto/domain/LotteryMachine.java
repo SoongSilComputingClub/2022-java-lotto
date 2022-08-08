@@ -1,7 +1,5 @@
 package org.sscc.study.lotto.domain;
 
-import java.util.Set;
-
 public class LotteryMachine {
     private static final int PRICE = 1000;
     private int number;
@@ -29,7 +27,7 @@ public class LotteryMachine {
         return number;
     }
 
-    public WinningStat getStat(Set<LottoNumber> winningNumbers) {
+    public WinningStat getStat(WinningNumbers winningNumbers) {
         lotteryTickets.duplicateNumbers(winningNumbers).forEach(x -> winningStat.add(x));
         return winningStat;
     }
