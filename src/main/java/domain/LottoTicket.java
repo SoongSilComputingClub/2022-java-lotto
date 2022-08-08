@@ -16,21 +16,8 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matching(WinningNumbers winningNumbers) {
-        Set<WinningNumber> myNumber = lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .map(number -> new WinningNumber(number, BallType.NORMAL))
-                .collect(Collectors.toSet());
-        myNumber.retainAll(winningNumbers.getWinningNumbers());
-        return myNumber.size();
-    }
-
-    public boolean matching(WinningNumber bonusNumber) {
-        Set<WinningNumber> myNumber = lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .map(number -> new WinningNumber(number, BallType.BONUS))
-                .collect(Collectors.toSet());
-        return myNumber.contains(bonusNumber);
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     public String toString() {

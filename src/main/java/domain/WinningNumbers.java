@@ -9,55 +9,55 @@ import java.util.stream.Collectors;
 public class WinningNumbers {
     private static final int LOTTERY_NUMBER_SIZE = 6;
 
-    private final Set<WinningNumber> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
 
-    private final WinningNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningNumbers(String winningNumbers, String bonusNumber) {
-        Set<WinningNumber> lottoNumbers = convertToSet(winningNumbers);
+        Set<LottoNumber> lottoNumbers = convertToSet(winningNumbers);
         checkValidation(lottoNumbers);
         this.winningNumbers = lottoNumbers;
 
-        WinningNumber bonus = convertToBall(bonusNumber);
+        LottoNumber bonus = convertToBall(bonusNumber);
         this.bonusNumber = bonus;
     }
 
-    public Set<WinningNumber> getWinningNumbers() {
+    public Set<LottoNumber> getWinningNumbers() {
         return Collections.unmodifiableSet(winningNumbers);
     }
 
-    public Rank match(LottoTicket lottoTicket) {
-        int count = lottoTicket.matching(this);
-        if (lottoTicket.matching(bonusNumber)) {
-            return Rank.of(count, true);
-        }
-        return Rank.of(count, false);
+    public Rank getRank(LottoTicket lottoTicket) {
+        int count = (int) winningNumbers.stream()
+                .filter(lottoTicket::contains)
+                .count();
+        boolean hasBonus = lottoTicket.contains(bonusNumber);
+        return Rank.of(count, hasBonus);
     }
 
-    private Set<WinningNumber> convertToSet(String input) {
+    private Set<LottoNumber> convertToSet(String input) {
         return Arrays.stream(input.split("\\s*,\\s*"))
                 .map(Integer::parseInt)
-                .map(number -> new WinningNumber(number, BallType.NORMAL))
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    private WinningNumber convertToBall(String input) {
-        return new WinningNumber(Integer.parseInt(input), BallType.BONUS);
+    private LottoNumber convertToBall(String input) {
+        return new LottoNumber(Integer.parseInt(input));
     }
 
-    private void checkValidation(Set<WinningNumber> lottoNumber) {
+    private void checkValidation(Set<LottoNumber> lottoNumber) {
         checkSize(lottoNumber);
         checkUniqueness(lottoNumber);
     }
 
-    private void checkSize(Set<WinningNumber> lottoNumber) {
+    private void checkSize(Set<LottoNumber> lottoNumber) {
         if (lottoNumber.size() != LOTTERY_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void checkUniqueness(Set<WinningNumber> lottoNumber) {
-        Set<WinningNumber> uniqueSetOfNumbers = new HashSet<>(lottoNumber);
+    private void checkUniqueness(Set<LottoNumber> lottoNumber) {
+        Set<LottoNumber> uniqueSetOfNumbers = new HashSet<>(lottoNumber);
         if (uniqueSetOfNumbers.size() != LOTTERY_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }

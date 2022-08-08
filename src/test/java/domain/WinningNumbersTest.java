@@ -26,8 +26,8 @@ class WinningNumbersTest {
         //given
         WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", "7");
         //when
-        Set<WinningNumber> unmodifiableNumbers = winningNumbers.getWinningNumbers();
+        Set<LottoNumber> unmodifiableNumbers = winningNumbers.getWinningNumbers();
         //then
-        assertThatThrownBy(() -> unmodifiableNumbers.add(new WinningNumber(3, BallType.NORMAL))).isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> unmodifiableNumbers.add(new LottoNumber(3))).isInstanceOf(UnsupportedOperationException.class);
     }
 }
