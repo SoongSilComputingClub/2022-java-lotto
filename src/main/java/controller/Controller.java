@@ -17,9 +17,9 @@ public class Controller {
     }
 
     public void execute() {
-        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(inputView.getMoney());
+        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(inputView.getMoney(), inputView.getManualDrawAmount());
         LottoMachine lottoMachine = new LottoMachine(lottoPurchaseMoney);
-        lottoMachine.purchase();
+        lottoMachine.purchase(inputView.getManualDraws());
 
         resultView.printTotalCount(lottoMachine.ticketsCount());
         resultView.printLottoTickets(lottoMachine.ticketsToString());

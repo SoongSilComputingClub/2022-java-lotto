@@ -11,11 +11,11 @@ class LottoMachineTest {
     @DisplayName("티켓 발급 테스트")
     void should_PurchaseTicket() {
         //given
-        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000");
+        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000", "1");
         //when
         LottoMachine lottoMachine = new LottoMachine(lottoPurchaseMoney);
         //then
-        assertThatNoException().isThrownBy(lottoMachine::purchase);
+        assertThatNoException().isThrownBy(() -> lottoMachine.purchase("1,2,3,4,5,6"));
         assertThat(lottoMachine.ticketsCount()).isEqualTo(14);
     }
 }

@@ -8,9 +8,9 @@ import java.util.Set;
 public class LottoTickets {
     private final Set<LottoTicket> lottoTickets;
 
-    public LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoTickets = new HashSet<>(lottoCount);
-        createLottoTickets(lottoNumberGenerator, lottoCount);
+    public LottoTickets(LottoPurchaseMoney lottoPurchaseMoney, Set<LottoTicket> manualTickets, LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoTickets = new HashSet<>(manualTickets);
+        createAutoLottoTickets(lottoNumberGenerator, lottoPurchaseMoney.getAutoDrawAmount());
     }
 
     public int totalCount() {
@@ -37,7 +37,7 @@ public class LottoTickets {
         return sb.toString();
     }
 
-    private void createLottoTickets(LottoNumberGenerator lottoNumberGenerator, int lottoCount) {
+    private void createAutoLottoTickets(LottoNumberGenerator lottoNumberGenerator, int lottoCount) {
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(new LottoTicket(lottoNumberGenerator.newLottoNumber()));
         }
