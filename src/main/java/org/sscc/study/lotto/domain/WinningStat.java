@@ -17,11 +17,7 @@ public class WinningStat {
     }
 
     public int get(Prize prize) {
-        return stat.keySet().stream()
-                .filter(n -> n == prize)
-                .map(stat::get)
-                .reduce(Integer::sum)
-                .orElse(0);
+        return stat.get(prize);
     }
 
     private int totalPrize() {
