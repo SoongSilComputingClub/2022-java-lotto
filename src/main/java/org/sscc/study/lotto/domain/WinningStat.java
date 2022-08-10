@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinningStat {
-    private static final int NUMBER = 6;
     private final Map<Prize, Integer> stat = new HashMap<>();
 
     public WinningStat() {
