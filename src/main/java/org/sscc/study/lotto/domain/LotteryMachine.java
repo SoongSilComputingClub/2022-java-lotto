@@ -4,7 +4,7 @@ public class LotteryMachine {
     private static final int PRICE = 1000;
     private int number;
     private LotteryTickets lotteryTickets;
-    private WinningStat winningStat;
+    private WinningStat winningStat = new WinningStat();
     private final NumberStrategy numberStrategy = new RandomLottoNumberGenerator();
 
     public void pay(int money) {
@@ -28,7 +28,7 @@ public class LotteryMachine {
     }
 
     public WinningStat getStat(WinningNumbers winningNumbers) {
-        lotteryTickets.duplicateNumbers(winningNumbers).forEach(x -> winningStat.add(x));
+        lotteryTickets.duplicateNumbers(winningNumbers).forEach(winningStat::add);
         return winningStat;
     }
 }

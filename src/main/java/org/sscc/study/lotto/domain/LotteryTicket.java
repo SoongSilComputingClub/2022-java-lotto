@@ -18,18 +18,7 @@ public class LotteryTicket {
                 .collect(Collectors.joining(", ")) + "]";
     }
 
-    private int checkDuplicates(WinningNumbers winningNumber) {
-        return (int) lotteryNumbers.stream()
-                .filter(winningNumber::hasNumber)
-                .count();
-    }
-
-    public MatchData getMatchData(WinningNumbers winningNumbers) {
-        return new MatchData(checkDuplicates(winningNumbers), checkBonusNumber(winningNumbers));
-    }
-
-    private boolean checkBonusNumber(WinningNumbers winningNumbers) {
-        return lotteryNumbers.stream()
-                .anyMatch(winningNumbers::hasBonusNumber);
+    public boolean checkNumber(LottoNumber lottoNumber) {
+        return lotteryNumbers.contains(lottoNumber);
     }
 }

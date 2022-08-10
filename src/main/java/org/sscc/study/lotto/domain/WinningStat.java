@@ -5,30 +5,21 @@ import java.util.Map;
 
 public class WinningStat {
     private static final int NUMBER = 6;
-    private final Map<MatchData, Integer> stat = new HashMap<>();
+    private final Map<Prize, Integer> stat = new HashMap<>();
 
     public WinningStat() {
-        for (int i = 0; i <= NUMBER; i++) {
-            stat.put(new MatchData(i, false), 0);
-            stat.put(new MatchData(i, true), 0);
+        for (Prize prize : Prize.values()) {
+            stat.put(prize, 0);
         }
     }
 
-    public void add(MatchData matchData) {
-        stat.replace(matchData, stat.get(matchData) + 1);
+    public void add(Prize prize) {
+        stat.replace(prize, stat.get(prize) + 1);
     }
 
-    public int get(int number) {
+    public int get(Prize prize) {
         return stat.keySet().stream()
-                .filter(n -> n.getNumber() == number)
-                .map(stat::get)
-                .reduce(Integer::sum)
-                .orElse(0);
-    }
-
-    public int get(int number, boolean bonus) {
-        return stat.keySet().stream()
-                .filter(n -> n.getNumber() == number && n.hasBonus() == bonus)
+                .filter(n -> n == prize)
                 .map(stat::get)
                 .reduce(Integer::sum)
                 .orElse(0);
@@ -36,7 +27,7 @@ public class WinningStat {
 
     private int totalPrize() {
         return stat.keySet().stream()
-                .map(n -> Prize.getPrize(n) * stat.get(n))
+                .map(n -> n.getPrize() * stat.get(n))
                 .reduce(Integer::sum)
                 .orElse(0);
     }

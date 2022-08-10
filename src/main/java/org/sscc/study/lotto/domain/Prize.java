@@ -18,29 +18,16 @@ public enum Prize {
         this.prize = prize;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public int getPrize() {
         return prize;
     }
 
-    public static int getPrize(MatchData matchData) {
+    public static Prize getPrize(int number, boolean bonus) {
         Prize result = Arrays.stream(Prize.values())
-                .filter(value -> matchData.getNumber() > Prize.NONE.number && value.number == matchData.getNumber())
-                .findAny()
+                .filter(value -> number > Prize.NONE.number && value.number == number)
+                .findFirst()
                 .orElse(Prize.NONE);
-        if (result.number == THIRD.number) {
-            return confirmBonus(matchData);
-        }
-        return result.prize;
-    }
-
-    private static int confirmBonus(MatchData matchData) {
-        if (matchData.hasBonus()) {
-            return SECOND.prize;
-        }
-        return THIRD.prize;
+        if (result.number == THIRD.number && bonus) return Prize.SECOND;
+        return result;
     }
 }

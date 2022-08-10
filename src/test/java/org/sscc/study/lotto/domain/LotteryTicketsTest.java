@@ -13,9 +13,9 @@ class LotteryTicketsTest {
     public void testWinning() {
         LotteryTickets lotteryTickets = new LotteryTickets();
         lotteryTickets.addLotteryTicket(new StaticLottoNumberGenerator());
-        List<MatchData> matchData = lotteryTickets.
+        List<Prize> matchData = lotteryTickets.
                 duplicateNumbers(new WinningNumbers("1, 2, 3, 4, 5, 6", 7));
-        assertThat(matchData.get(0)).isEqualTo(new MatchData(6, false));
+        assertThat(matchData.get(0)).isEqualTo(Prize.FIRST);
     }
 
     @Test
@@ -23,9 +23,9 @@ class LotteryTicketsTest {
     public void testSecond() {
         LotteryTickets lotteryTickets = new LotteryTickets();
         lotteryTickets.addLotteryTicket(new StaticLottoNumberGenerator());
-        List<MatchData> matchData = lotteryTickets.
+        List<Prize> matchData = lotteryTickets.
                 duplicateNumbers(new WinningNumbers("1, 2, 3, 4, 5, 10", 6));
-        assertThat(matchData.get(0)).isEqualTo(new MatchData(5, true));
+        assertThat(matchData.get(0)).isEqualTo(Prize.SECOND);
     }
 
     @Test

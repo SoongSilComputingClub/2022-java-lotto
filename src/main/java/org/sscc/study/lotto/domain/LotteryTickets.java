@@ -15,9 +15,9 @@ public class LotteryTickets {
         lotteryTickets.add(new LotteryTicket(numberStrategy.getNumber()));
     }
 
-    public List<MatchData> duplicateNumbers(WinningNumbers winningNumber) {
+    public List<Prize> duplicateNumbers(WinningNumbers winningNumber) {
         return lotteryTickets.stream()
-                .map(x -> x.getMatchData(winningNumber))
+                .map(x -> Prize.getPrize(winningNumber.checkNumbers(x), winningNumber.checkBonus(x)))
                 .collect(Collectors.toList());
     }
 

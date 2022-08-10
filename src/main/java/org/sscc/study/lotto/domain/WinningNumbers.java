@@ -28,11 +28,13 @@ public class WinningNumbers {
         }
     }
 
-    public boolean hasNumber(LottoNumber x) {
-        return winningNumbers.contains(x);
+    public int checkNumbers(LotteryTicket lotteryTicket) {
+        return (int) winningNumbers.stream()
+                .filter(lotteryTicket::checkNumber)
+                .count();
     }
 
-    public boolean hasBonusNumber(LottoNumber x) {
-        return bonusNumber.equals(x);
+    public boolean checkBonus(LotteryTicket lotteryTicket) {
+        return lotteryTicket.checkNumber(bonusNumber);
     }
 }
