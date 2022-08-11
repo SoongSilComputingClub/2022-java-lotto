@@ -19,6 +19,7 @@ public class WinningNumbers {
         this.winningNumbers = lottoNumbers;
 
         LottoNumber bonus = convertToBall(bonusNumber);
+        checkValidation(bonus);
         this.bonusNumber = bonus;
     }
 
@@ -45,21 +46,27 @@ public class WinningNumbers {
         return new LottoNumber(Integer.parseInt(input));
     }
 
-    private void checkValidation(Set<LottoNumber> lottoNumber) {
-        checkSize(lottoNumber);
-        checkUniqueness(lottoNumber);
+    private void checkValidation(Set<LottoNumber> lottoNumbers) {
+        checkSize(lottoNumbers);
+        checkRedundancy(lottoNumbers);
     }
 
-    private void checkSize(Set<LottoNumber> lottoNumber) {
-        if (lottoNumber.size() != LOTTERY_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
+    private void checkValidation(LottoNumber bonus) {
+        if (winningNumbers.contains(bonus)) {
+            throw new IllegalArgumentException("로또 당첨 번호와 보너스 번호가 중복됩니다");
         }
     }
 
-    private void checkUniqueness(Set<LottoNumber> lottoNumber) {
-        Set<LottoNumber> uniqueSetOfNumbers = new HashSet<>(lottoNumber);
+    private void checkSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTERY_NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또 당첨 번호는 6개입니다.");
+        }
+    }
+
+    private void checkRedundancy(Set<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> uniqueSetOfNumbers = new HashSet<>(lottoNumbers);
         if (uniqueSetOfNumbers.size() != LOTTERY_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 당첨 번호는 중복될 수 없습니다.");
         }
     }
 }

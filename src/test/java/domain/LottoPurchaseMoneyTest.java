@@ -18,13 +18,15 @@ class LottoPurchaseMoneyTest {
     @DisplayName("로또 구입 금액 테스트")
     void should_ReturnMaxCount(String money) {
         //given
-        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000");
+        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000", "0");
         //when
 
         //then
-        assertThatNoException().isThrownBy(() -> new LottoPurchaseMoney("14000"));
-        assertThatThrownBy(() -> new LottoPurchaseMoney(money))
+        assertThatNoException().isThrownBy(() -> new LottoPurchaseMoney("14000", "0"));
+        assertThatThrownBy(() -> new LottoPurchaseMoney(money, ""))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThat(lottoPurchaseMoney.getAmount()).isEqualTo(14);
+        assertThatThrownBy(() -> new LottoPurchaseMoney("14000", "15"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(lottoPurchaseMoney.getLottoAmount()).isEqualTo(14);
     }
 }

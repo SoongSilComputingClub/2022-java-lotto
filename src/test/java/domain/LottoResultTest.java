@@ -14,7 +14,7 @@ class LottoResultTest {
     @DisplayName("수익률 계산 테스트")
     void should_ReturnPERatio() {
         //given
-        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000");
+        LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000", "0");
         List<Rank> ranks = new ArrayList<>();
         ranks.add(Rank.FIFTH);
         //when

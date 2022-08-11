@@ -3,15 +3,18 @@ package domain;
 public class LottoPurchaseMoney {
     private static final int LOTTO_PRICE = 1000;
 
-    private final int lottoAmount;
+    private final int autoDrawAmount;
 
-    private final int lottoInvestMoney;
+    private final int manualDrawAmount;
 
-    public LottoPurchaseMoney(String input) {
-        int krw = Integer.parseInt(input);
+    public LottoPurchaseMoney(String money, String manualDrawAmount) {
+        int krw = Integer.parseInt(money);
         validateMoney(krw);
-        this.lottoAmount = krw / LOTTO_PRICE;
-        this.lottoInvestMoney = lottoAmount * LOTTO_PRICE;
+        int manual = Integer.parseInt(manualDrawAmount);
+        validateAmount(manual, krw);
+
+        this.manualDrawAmount = manual;
+        this.autoDrawAmount = krw / LOTTO_PRICE - manual;
     }
 
     private void validateMoney(int krw) {
@@ -20,11 +23,21 @@ public class LottoPurchaseMoney {
         }
     }
 
-    public int getAmount() {
-        return lottoAmount;
+    private void validateAmount(int manual, int krw) {
+        if (manual * LOTTO_PRICE > krw) {
+            throw new IllegalArgumentException("구매 금액이 부족합니다.");
+        }
+    }
+
+    public int getLottoAmount() {
+        return autoDrawAmount + manualDrawAmount;
     }
 
     public int getInvestMoney() {
-        return lottoInvestMoney;
+        return (autoDrawAmount + manualDrawAmount) * LOTTO_PRICE;
+    }
+
+    public int getAutoDrawAmount() {
+        return autoDrawAmount;
     }
 }
