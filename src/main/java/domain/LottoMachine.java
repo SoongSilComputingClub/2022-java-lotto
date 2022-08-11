@@ -16,7 +16,7 @@ public class LottoMachine {
         this.lottoPurchaseMoney = lottoPurchaseMoney;
     }
 
-    public void purchase(String manualDraws) {
+    public void purchase(List<String> manualDraws) {
         Set<LottoTicket> manualTickets = convertManualDrawsToLottoTickets(manualDraws);
         lottoTickets = new LottoTickets(lottoPurchaseMoney, manualTickets, generator);
     }
@@ -33,10 +33,12 @@ public class LottoMachine {
         return lottoTickets.totalCount();
     }
 
-    private Set<LottoTicket> convertManualDrawsToLottoTickets(String manualDraws) {
+    private Set<LottoTicket> convertManualDrawsToLottoTickets(List<String> manualDrawList) {
         Set<LottoTicket> manualTickets = new HashSet<>();
-        List<String> manualDrawList = Arrays.stream(manualDraws.split("\n"))
-                .collect(Collectors.toList());
+
+        if (manualDrawList.isEmpty()) {
+            return manualTickets;
+        }
 
         manualDrawList.forEach(manualDraw -> manualTickets.add(convertManualDrawToLottoTicket(manualDraw)));
         return manualTickets;

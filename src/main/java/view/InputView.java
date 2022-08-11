@@ -1,9 +1,13 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
     private final Scanner scanner;
+
+    private String manualDrawAmount;
 
     public InputView() {
         this.scanner = new Scanner(System.in);
@@ -16,21 +20,23 @@ public class InputView {
 
     public String getManualDrawAmount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextLine();
+        manualDrawAmount = scanner.nextLine();
+        return manualDrawAmount;
     }
 
-    public String getManualDraws() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        StringBuilder input = new StringBuilder();
-        String line;
-        while (scanner.hasNextLine()) {
-            line = scanner.nextLine();
-            if (line.isEmpty()) {
-                break;
-            }
-            input.append(line).append("\n");
+    public List<String> getManualDraws() {
+        int manualDrawAmount = Integer.parseInt(this.manualDrawAmount);
+        List<String> inputs = new ArrayList<>();
+
+        if (manualDrawAmount <= 0) {
+            return inputs;
         }
-        return input.toString();
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        while (manualDrawAmount-- > 0) {
+            inputs.add(scanner.nextLine());
+        }
+        return inputs;
     }
 
     public String getWinner() {

@@ -1,8 +1,8 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -35,17 +35,18 @@ public class LottoTicket {
 
     private void checkValidation(Set<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
-        checkUniqueness(lottoNumbers);
+        checkRedundancy(lottoNumbers);
     }
 
     private void checkSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTERY_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 당첨 번호는 6개입니다.");
         }
     }
 
-    private void checkUniqueness(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTERY_NUMBER_SIZE) {
+    private void checkRedundancy(Set<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> SetOfNumbers = new HashSet<>(lottoNumbers);
+        if (SetOfNumbers.size() != LOTTERY_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
     }

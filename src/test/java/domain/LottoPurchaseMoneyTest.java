@@ -25,6 +25,8 @@ class LottoPurchaseMoneyTest {
         assertThatNoException().isThrownBy(() -> new LottoPurchaseMoney("14000", "0"));
         assertThatThrownBy(() -> new LottoPurchaseMoney(money, ""))
                 .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoPurchaseMoney("14000", "15"))
+                .isInstanceOf(IllegalArgumentException.class);
         assertThat(lottoPurchaseMoney.getLottoAmount()).isEqualTo(14);
     }
 }
