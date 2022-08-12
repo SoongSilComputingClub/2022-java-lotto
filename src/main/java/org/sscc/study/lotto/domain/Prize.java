@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum Prize {
     NONE(2, 0),
-    FOURTH(3, 5000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
+    FIFTH(3, 5000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private final int number;
@@ -17,11 +18,16 @@ public enum Prize {
         this.prize = prize;
     }
 
-    public static int getPrize(int number) {
+    public int getPrize() {
+        return prize;
+    }
+
+    public static Prize getPrize(int number, boolean bonus) {
         Prize result = Arrays.stream(Prize.values())
                 .filter(value -> number > Prize.NONE.number && value.number == number)
-                .findAny()
+                .findFirst()
                 .orElse(Prize.NONE);
-        return result.prize;
+        if (result.number == THIRD.number && bonus) return Prize.SECOND;
+        return result;
     }
 }

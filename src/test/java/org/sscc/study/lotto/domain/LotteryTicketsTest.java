@@ -13,9 +13,19 @@ class LotteryTicketsTest {
     public void testWinning() {
         LotteryTickets lotteryTickets = new LotteryTickets();
         lotteryTickets.addLotteryTicket(new StaticLottoNumberGenerator());
-        List<Integer> duplicate = lotteryTickets.duplicateNumbers(
-                new WinningNumbers("1, 2, 3, 4, 5, 6").getWinningNumbers());
-        assertThat(duplicate).isEqualTo(List.of(6));
+        List<Prize> matchData = lotteryTickets.
+                duplicateNumbers(new WinningNumbers("1, 2, 3, 4, 5, 6", 7));
+        assertThat(matchData.get(0)).isEqualTo(Prize.FIRST);
+    }
+
+    @Test
+    @DisplayName("2등(5개-보너스볼)이 일치되는 지 확인")
+    public void testSecond() {
+        LotteryTickets lotteryTickets = new LotteryTickets();
+        lotteryTickets.addLotteryTicket(new StaticLottoNumberGenerator());
+        List<Prize> matchData = lotteryTickets.
+                duplicateNumbers(new WinningNumbers("1, 2, 3, 4, 5, 10", 6));
+        assertThat(matchData.get(0)).isEqualTo(Prize.SECOND);
     }
 
     @Test

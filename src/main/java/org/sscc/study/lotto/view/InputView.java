@@ -15,6 +15,8 @@ public class InputView {
 
     public WinningNumbers inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new WinningNumbers(sc.nextLine());
+        String s = sc.nextLine();
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new WinningNumbers(s, Integer.parseInt(sc.nextLine()));
     }
 }

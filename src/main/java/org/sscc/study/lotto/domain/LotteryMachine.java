@@ -1,12 +1,10 @@
 package org.sscc.study.lotto.domain;
 
-import java.util.Set;
-
 public class LotteryMachine {
     private static final int PRICE = 1000;
     private int number;
     private LotteryTickets lotteryTickets;
-    private WinningStat winningStat;
+    private WinningStat winningStat = new WinningStat();
     private final NumberStrategy numberStrategy = new RandomLottoNumberGenerator();
 
     public void pay(int money) {
@@ -29,8 +27,8 @@ public class LotteryMachine {
         return number;
     }
 
-    public WinningStat getStat(Set<LottoNumber> winningNumbers) {
-        lotteryTickets.duplicateNumbers(winningNumbers).forEach(x -> winningStat.add(x));
+    public WinningStat getStat(WinningNumbers winningNumbers) {
+        lotteryTickets.duplicateNumbers(winningNumbers).forEach(winningStat::add);
         return winningStat;
     }
 }

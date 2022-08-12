@@ -6,10 +6,12 @@ import java.util.StringTokenizer;
 
 public class WinningNumbers {
     private final Set<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(String input) {
+    public WinningNumbers(String input, int bonusNumber) {
         winningNumbers = new HashSet<>();
         getWinningNumbers(input);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     private void getWinningNumbers(String input) {
@@ -26,7 +28,13 @@ public class WinningNumbers {
         }
     }
 
-    public Set<LottoNumber> getWinningNumbers() {
-        return winningNumbers;
+    public int checkNumbers(LotteryTicket lotteryTicket) {
+        return (int) winningNumbers.stream()
+                .filter(lotteryTicket::checkNumber)
+                .count();
+    }
+
+    public boolean checkBonus(LotteryTicket lotteryTicket) {
+        return lotteryTicket.checkNumber(bonusNumber);
     }
 }

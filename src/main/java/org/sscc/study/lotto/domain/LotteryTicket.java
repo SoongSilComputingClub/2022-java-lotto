@@ -18,9 +18,7 @@ public class LotteryTicket {
                 .collect(Collectors.joining(", ")) + "]";
     }
 
-    public int checkDuplicates(Set<LottoNumber> winningNumber) {
-        return (int) winningNumber.stream()
-                .filter(lotteryNumbers::contains)
-                .count();
+    public boolean checkNumber(LottoNumber lottoNumber) {
+        return lotteryNumbers.contains(lottoNumber);
     }
 }

@@ -1,18 +1,19 @@
 package org.sscc.study.lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RandomLottoNumberGenerator implements NumberStrategy {
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
     private static final int MAXIMUM = 45;
     private static final int MINIMUM = 1;
     private static final int NUMBER = 6;
-
-    public RandomLottoNumberGenerator() {
-        for (int i = MINIMUM; i <= MAXIMUM; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-    }
+    private static final List<LottoNumber> lottoNumbers = IntStream.range(MINIMUM, MAXIMUM)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
 
     @Override
     public Set<LottoNumber> getNumber() {

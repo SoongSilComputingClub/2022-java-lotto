@@ -21,7 +21,7 @@ public class Controller {
         resultView.printLottoNumbers(lotteryMachine.getString());
 
         WinningNumbers winningNumbers = inputView.inputWinningNumbers();
-        WinningStat winningStat = lotteryMachine.getStat(winningNumbers.getWinningNumbers());
+        WinningStat winningStat = lotteryMachine.getStat(winningNumbers);
         resultView.printStat(winningStat);
         resultView.printPortfolio(winningStat.portfolio(money.getMoney()));
     }
