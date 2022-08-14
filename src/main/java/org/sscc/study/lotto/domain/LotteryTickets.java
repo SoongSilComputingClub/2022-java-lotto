@@ -11,7 +11,11 @@ public class LotteryTickets {
         lotteryTickets = new ArrayList<>();
     }
 
-    public void addLotteryTicket(NumberStrategy numberStrategy) {
+    public void addManualTicket(LotteryTicket lotteryTicket) {
+        lotteryTickets.add(lotteryTicket);
+    }
+
+    public void addAutoTicket(NumberStrategy numberStrategy) {
         lotteryTickets.add(new LotteryTicket(numberStrategy.getNumber()));
     }
 
