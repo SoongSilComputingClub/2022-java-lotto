@@ -4,12 +4,13 @@ import org.sscc.study.lotto.domain.Prize;
 import org.sscc.study.lotto.domain.WinningStat;
 
 public class ResultView {
-    public void printNumber(int number) {
-        System.out.println(number + "개를 구매했습니다.");
-    }
 
     public void printLottoNumbers(String result) {
         System.out.println(result);
+    }
+
+    public void printNumber(int manual, int auto) {
+        System.out.println("수동으로 " + manual + "장, 자동으로 " + auto + "개를 구매했습니다.");
     }
 
     public void printStat(WinningStat winningStat) {

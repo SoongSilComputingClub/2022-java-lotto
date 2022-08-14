@@ -7,6 +7,8 @@ import org.sscc.study.lotto.domain.WinningStat;
 import org.sscc.study.lotto.view.InputView;
 import org.sscc.study.lotto.view.ResultView;
 
+import java.util.List;
+
 public class Controller {
     public static void main(String[] args) {
         InputView inputView = new InputView();
@@ -15,9 +17,12 @@ public class Controller {
 
         InputMoney money = inputView.inputPrice();
         lotteryMachine.pay(money.getMoney());
+        lotteryMachine.setManualNumber(inputView.inputManualNumber());
+        List<String> manualNumbers = inputView.inputLotteryNumbers(lotteryMachine.getManualNumber());
+        lotteryMachine.buyManualTicket(manualNumbers);
         lotteryMachine.drawNumbers();
 
-        resultView.printNumber(lotteryMachine.getNumber());
+        resultView.printNumber(lotteryMachine.getNumber(), lotteryMachine.getManualNumber());
         resultView.printLottoNumbers(lotteryMachine.getString());
 
         WinningNumbers winningNumbers = inputView.inputWinningNumbers();
